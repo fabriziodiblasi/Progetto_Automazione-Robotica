@@ -1,0 +1,12 @@
+%manipolatore seriale con 6 giunti rotoidali
+clear();
+clc();
+
+L(1) = Link('d',0.0,'a',0.0,'alpha',pi/2,'revolute');
+L(2) = Link('d',0.0,'a',0.4323,'alpha',0.0,'revolute');
+L(3) = Link('d',0.1501,'a',0,'alpha',-pi/2,'revolute');
+L(4) = Link('d',0.4331,'a',0.0,'alpha',pi/2,'revolute');
+L(5) = Link('d',0.0,'a',0.0,'alpha',-pi/2,'revolute');
+L(6) = Link('d',0.0,'a',0.0,'alpha',0.0,'revolute');
+
+manipolatore_seriale = SerialLink(L, 'name','sixlink');
