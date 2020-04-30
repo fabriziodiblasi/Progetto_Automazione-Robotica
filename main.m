@@ -49,11 +49,6 @@ end
 
 T
 
-% posizioni del manipolatore espresse in variabili di giunto
-
-
-%manipolatore_seriale.plot([pi/2,-pi/4,pi/8,pi/10,pi/4,pi/3])
-
 
 
 
