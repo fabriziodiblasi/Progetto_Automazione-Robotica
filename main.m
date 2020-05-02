@@ -30,16 +30,25 @@ q_5 = [0,0,-pi/2,pi/6,0,-pi/4];
 %q(6) = [0 ? ?/? 0 0 ? ?/4 0]
 q_6 = [0,-pi/4,0,0,-pi/4,0];
 
+
+matrice_vettori_q= [ 0,0,0,0,0,0;...
+                     0,0,-pi/4,0,0,0;...
+                     0,pi/4,-pi,0,0,0;...
+                     0,pi/4,-pi,0,pi/4,0;...
+                     0,0,-pi/2,pi/6,0,-pi/4;...
+                     0,-pi/4,0,0,-pi/4,0];
+
+
 %cinematica diretta tramite CORKE
-fkine(puma50_model, q_1)
-%fkine(puma50_model, q_2)
+%fkine(puma50_model, q_1)
+fkine(puma50_model, q_2)
 %fkine(puma50_model, q_3)
 %fkine(puma50_model, q_4)
 %fkine(puma50_model, q_5)
 %fkine(puma50_model, q_6)
 
 for i=1:6
-    A = calcolo_matrice_trasformazione(alpha(i), theta(i), d(i), a(i));
+    A = calcolo_matrice_trasformazione(alpha(i), q_2(i), d(i), a(i));
     if i == 1
         T = A;
     elseif i>1
@@ -48,7 +57,6 @@ for i=1:6
 end
 
 T
-
 
 
 
