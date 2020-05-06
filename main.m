@@ -39,7 +39,7 @@ Q= [ 0,0,0,0,0,0;...
      0,-pi/4,0,0,-pi/4,0];
 
 
-%cinematica diretta tramite CORKE
+%cinematica diretta tramite CORKE e calcolata manualmente
 for row=1:6
     for col=1:6
         A = calcolo_matrice_trasformazione(alpha(col), Q(row,col), d(col), a(col));
@@ -53,8 +53,20 @@ for row=1:6
     fkine(puma50_model, Q(row,:)) %matrici della cinematica diretta calcolate con il toolbox di corke
 end
 
+%PIANIFICAZIONE DELLA TRAIETTORIA CON PROFILO DI VELOCITA' TRAPEZOIDALE
+% ORIENTAMENTI DEFINITI SECONDO LA CONVENZIONE RPY
 
+p_i = [0.05, -0.45, -0.05, 0, 0, 0]; %punto inziale
 
+p_f = [0.60, 0.15, 0.05, 0, 0, 0]; % punto finale
+
+%parametri della legge di moto trapezoidale
+
+tempo_totale = 3; %secondi
+tempo_acc_dec = 0.5; %durata della rampa di salita e di discesa
+
+%MOTO PUNTO PUNTO
+segmento_nello_spazio(p_i, p_f)
 
 
 
