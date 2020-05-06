@@ -1,4 +1,5 @@
 function plot_interpolated_trajectory(q_traj_t, q_traj_p, t, q_targhet)
+    figure;
     plot(q_traj_t, q_traj_p);
     xlabel("tempo")
     ylabel("posizione")

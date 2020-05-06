@@ -13,21 +13,22 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     %legge_trapezoidale_scaricata(10,3,7)
 
     [p,F] = legge_moto_trapezoidale([t_salita, t_rettilineo_unif, t_discesa],x_e_i(1:3), x_e_f(1:3), NPunti);
-%     
-%     subplot(4,1,1)
-%     plot(p,F(1,:))
-%     xlabel("tempo [s]")
-%     ylabel("posizione [m]")
-%     
-%     subplot(4,1,2)
-%     plot(p,F(2,:))
-%     xlabel("tempo [s]")
-%     ylabel("velocità [m/s]")
-%     
-%     subplot(4,1,3)
-%     plot(p,F(3,:))
-%     xlabel("tempo [s]")
-%     ylabel("accelerazione [m/s2]")
+%    
+    figure;
+    subplot(4,1,1)
+    plot(p,F(1,:))
+    xlabel("tempo [s]")
+    ylabel("posizione [m]")
+    
+    subplot(4,1,2)
+    plot(p,F(2,:))
+    xlabel("tempo [s]")
+    ylabel("velocità [m/s]")
+    
+    subplot(4,1,3)
+    plot(p,F(3,:))
+    xlabel("tempo [s]")
+    ylabel("accelerazione [m/s2]")
     
     
 %     subplot(4,1,4)
@@ -45,17 +46,18 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     for i=1:size(x_e,1)
         Frames{i} = transl(x_e(i,1:3));
     end
-
-%     plot_frames(Frames);
-%     hold on;
-%     scatter3(x_e(2:end,1),x_e(2:end,2),x_e(2:end,3), 'ob');
-%     scatter3(x_e(1,1),x_e(1,2),x_e(1,3), 'or');
-%     xlabel('x[m]')
-%     ylabel('y[m]')
-%     zlabel('z[m]')
-%     xlim([-1.0, 1.0])
-%     ylim([-1.0, 1.0])
-%     zlim([-1.0, 1.0])
+    
+    figure;
+    plot_frames(Frames);
+    hold on;
+    scatter3(x_e(2:end,1),x_e(2:end,2),x_e(2:end,3), 'ob');
+    scatter3(x_e(1,1),x_e(1,2),x_e(1,3), 'or');
+    xlabel('x[m]')
+    ylabel('y[m]')
+    zlabel('z[m]')
+    xlim([-1.0, 1.0])
+    ylim([-1.0, 1.0])
+    zlim([-1.0, 1.0])
     
     %creo il vettore delle matrici di trasformazione
     T(:,:,1)=transl(x_e(1,1:3)); 
