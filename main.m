@@ -14,7 +14,7 @@ theta = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 d = [0.0,  0.0,  0.1501,  0.4331,  0.0,  0.0];
 
 
-puma50_model = load_puma560_model(d, a, alpha);
+puma560_model = load_puma560_model(d, a, alpha);
 
 % X = 4
 % %q(1) = [0 0 0 0 0 0]
@@ -50,7 +50,7 @@ for row=1:6
         end
     end
     T %matrice calcolata manualmente sostituendo i vettori di giunto al posto del parametro theta
-    fkine(puma50_model, Q(row,:)) %matrici della cinematica diretta calcolate con il toolbox di corke
+    fkine(puma560_model, Q(row,:)) %matrici della cinematica diretta calcolate con il toolbox di corke
 end
 
 %PIANIFICAZIONE DELLA TRAIETTORIA CON PROFILO DI VELOCITA' TRAPEZOIDALE
@@ -66,7 +66,7 @@ tempo_totale = 3; %secondi
 tempo_acc_dec = 0.5; %durata della rampa di salita e di discesa
 
 %MOTO PUNTO PUNTO
-segmento_nello_spazio(p_i, p_f)
+segmento_nello_spazio_operativo(p_i, p_f, puma560_model)
 
 
 
