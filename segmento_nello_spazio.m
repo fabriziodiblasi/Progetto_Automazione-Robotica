@@ -1,11 +1,11 @@
 function segmento_nello_spazio(x_e_i, x_e_f)
     % dal testo sappiamo che:
     % tratto di salita = 0.5 secondi
-    % tratto rettilineo =  1 secondo
+    % tratto rettilineo =  2 secondi
     % tratto di discesa = 0.5 secondi
 
     t_salita = 0.5;
-    t_rettilineo_unif = 1;
+    t_rettilineo_unif = 2;
     t_discesa = 0.5;
   
     %legge_trapezoidale_scaricata(10,3,7)
