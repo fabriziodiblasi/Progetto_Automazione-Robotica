@@ -66,16 +66,39 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
 
     end
     q_targhet = ikine(puma560_model, T, [zeros(1,6)]);
-    [num_samples,n] = size(q_targhet)
+    [num_samples,num_col] = size(q_targhet)
 
 
-    T = (t_salita + t_rettilineo_unif + t_discesa )/num_samples * ones(1, num_samples-1);
+    T = (t_salita + t_rettilineo_unif + t_discesa )/num_samples * ones(1, num_samples-1)
 
     [q_traj_t, q_traj_p, t]= join_spline_interpolation(q_targhet, T);
-
-    plot_interpolated_trajectory(q_traj_t, q_traj_p, t, q_targhet);
-    
+    %posizione
+    plot_interpolated_trajectory(q_traj_t, q_traj_p, t, q_targhet, "posizione");
     run_simulation(0.1, q_traj_t, q_traj_p)
+    
+    %velocità
+    vel = zeros(num_samples,num_col);
+    for col=1:num_col
+        for row=1:num_samples-1
+            vel(row,col) = (q_targhet(row+1,col)- q_targhet(row,col))/T(row);
+        end
+    end
+    [time, q_v, t]= join_spline_interpolation(vel, T);
+    plot_interpolated_trajectory(time, q_v, t, q_targhet, "velocita'");
+    
+    
+    %accelerazione
+    acc = zeros(num_samples,num_col);
+    for col=1:num_col
+        for row=1:num_samples-1
+            acc(row,col) = (vel(row+1,col)- vel(row,col))/T(row);
+        end
+    end
+    [time, q_a, t]= join_spline_interpolation(acc, T);
+    plot_interpolated_trajectory(time, q_a, t, q_targhet, "accelerazione");
+    
+
+    
     
 end
 
