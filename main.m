@@ -56,9 +56,9 @@ end
 %PIANIFICAZIONE DELLA TRAIETTORIA CON PROFILO DI VELOCITA' TRAPEZOIDALE
 % ORIENTAMENTI DEFINITI SECONDO LA CONVENZIONE RPY
 
-p_i = [0.05, -0.45, -0.05, 0, 0, 0]; %punto inziale
+p_i = [0.06, -0.45, -0.05, 0, 0, 0]; %punto inziale
 
-p_f = [0.60, 0.15, 0.05, 0, 0, 0]; % punto finale
+p_f = [0.60, 0.15, 0.06, 0, 0, 0]; % punto finale
 
 %parametri della legge di moto trapezoidale
 

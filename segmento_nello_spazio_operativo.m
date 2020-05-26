@@ -38,6 +38,8 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     s_posizione_start=0;
     s_posizione_end=norm(x_e_f(1:3)-x_e_i(1:3));
     
+    
+    
     for i=1:size(F,2)
         x_e(i,1:3)=x_e_i(1:3)+(F(1,i)/norm(x_e_f(1:3)- x_e_i(1:3))) * (x_e_f(1:3)-x_e_i(1:3));
     end
@@ -60,12 +62,15 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     zlim([-1.0, 1.0])
     
     %creo il vettore delle matrici di trasformazione
+    
     T(:,:,1)=transl(x_e(1,1:3)); 
     for i=2:size(x_e,1)
         T(:,:,i)=transl(x_e(i,1:3)); 
 
     end
+    
     q_targhet = ikine(puma560_model, T, [zeros(1,6)]);
+
     [num_samples,num_col] = size(q_targhet)
 
 
