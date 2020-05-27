@@ -15,42 +15,42 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     s_posizione_end = norm(x_e_f(1:3)-x_e_i(1:3));
 
     [p,F] = legge_moto_trapezoidale([t_salita, t_rettilineo_unif, t_discesa],s_posizione_end, s_posizione_start, NPunti);
-    
-%    
-    figure;
-    title("Grafici della legge di moto")
-    subplot(4,1,1)
+    [p_mod,F_mod] = trapezoidale_mod([0.05, 0.4, 0.05, 2, 0.05, 0.4, 0.05],300,[0.0, 0.0, 0.0, 0.6560]);
+
+    figure('Name','Leggi di moto (sx: custom, dx = canonica'); 
+    subplot(4,2,1)
     plot(p,F(1,:))
     xlabel("tempo [s]")
     ylabel("posizione [m]")
     
-    subplot(4,1,2)
+    subplot(4,2,2)
+    plot(p_mod,F_mod(1,:))
+    xlabel("tempo [s]")
+    ylabel("posizione [m]")
+    ylim([0.0, 1.0])
+    
+    subplot(4,2,3)
     plot(p,F(2,:))
     xlabel("tempo [s]")
     ylabel("velocità [m/s]")
     
-    subplot(4,1,3)
+    subplot(4,2,4)
+    plot(p_mod,F_mod(2,:))
+    xlabel("tempo [s]")
+    ylabel("velocità [m/s]")
+    ylim([0.0, 0.4])
+    
+    subplot(4,2,5)
     plot(p,F(3,:))
     xlabel("tempo [s]")
     ylabel("accelerazione [m/s2]")
     
-    [p_mod,F_mod] = trapezoidale_mod([0.05, 0.4, 0.05, 2, 0.05, 0.4, 0.05],NPunti,[0.0, 0.0, 0.0, 0.6560]);
-    figure;
-    title("Grafici della legge di moto canonica svolta a lezione")
-    subplot(4,1,1)
-    plot(p_mod,F_mod(1,:))
-    xlabel("tempo [s]")
-    ylabel("posizione [m]")
-    
-    subplot(4,1,2)
-    plot(p_mod,F_mod(2,:))
-    xlabel("tempo [s]")
-    ylabel("velocità [m/s]")
-    
-    subplot(4,1,3)
+    subplot(4,2,6)
     plot(p_mod,F_mod(3,:))
     xlabel("tempo [s]")
     ylabel("accelerazione [m/s2]")
+    
+    
     
 %     subplot(4,1,4)
 %     plot(p,F(4,:))

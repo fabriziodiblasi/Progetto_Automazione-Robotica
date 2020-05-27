@@ -1,22 +1,22 @@
 function esegui_punto_5_6(x_e_start, x_e_stop, puma560_model, NPunti)
 
-            step_time=0.01
+            step_time=0.01;
             %[trajectory_p,trajectory_v] = legge_moto_trapezoidale([0.5, 2.0, 0.5],q_stop, q_start, NPunti);
-            T(:,:,1) = transl(x_e_start(1,1:3)) 
-            T(:,:,2) = transl(x_e_stop(1,1:3))
+            T(:,:,1) = transl(x_e_start(1,1:3)); 
+            T(:,:,2) = transl(x_e_stop(1,1:3));
 
             q_start = ikine(puma560_model,  T(:,:,1), [zeros(1,6)]); 
             q_stop = ikine(puma560_model,  T(:,:,2), [zeros(1,6)]); 
 
-            [trajectory_p,trajectory_v] = compute_trajectory(q_start, q_stop, step_time, NPunti)
+            [trajectory_p,trajectory_v] = compute_trajectory(q_start, q_stop, step_time, NPunti);
 
 
-            %parametri del controllore
-            K_p=[2000,1500,1500,200,150,50]
-            K_d=[20, 10, 10, 1.0, 0.8, 0.3]
-            K_i=[100, 75, 75, 50, 25, 10]
+           
+            K_p = [0.003, 0.00423, 0.0065, 0.00567, 0.0034, 0.00234];
+            K_d = [0.0020, 0.0010, 0.0010, 0.003, 0.0008, 0.0003];
+            K_i=[100, 75, 75, 50, 25, 10];
             
-            simulator = puma560VrepSimulator();
+            simulator = puma560VrepSimulator()
 
             simulator.setq(q_start);
             pause(0.5);
@@ -24,8 +24,11 @@ function esegui_punto_5_6(x_e_start, x_e_stop, puma560_model, NPunti)
             t=0;
             q_history = [];
             for i=1:length(trajectory_p(:,1))
-
+                
                 q = simulator.getq();
+%                 if all(isnan(q(:)))
+%                     q = zeros(1,6)
+%                 end 
                 q_d = trajectory_p(i, 2:7);
 
                 dq = simulator.getdq();
@@ -35,9 +38,9 @@ function esegui_punto_5_6(x_e_start, x_e_stop, puma560_model, NPunti)
 
                 e_d= dq_d - dq;
 
-                e_i = e_i + e_p .*step_time;
+                %e_i = e_i + e_p .*step_time;
 
-                tau = K_p .* e_p + K_d.*e_d + K_i .*e_i;
+                tau = K_p .* e_p + K_d.*e_d + gravload(puma560_model, q);% + K_i .*e_i;
 
                 simulator.set_torque(tau, step_time);
 
@@ -45,11 +48,11 @@ function esegui_punto_5_6(x_e_start, x_e_stop, puma560_model, NPunti)
 
                 t = t+ step_time;
 
-                time(i)=t
-
+                time(i)=t;
+                
             end
 
-            figure;
+            figure('Name', 'Grafici Controllore PID');
             for i=1:6
                 subplot(6,1,i)
                 plot(time, q_history(:,i), time, trajectory_p(:,i+1));

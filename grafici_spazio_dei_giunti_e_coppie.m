@@ -1,16 +1,17 @@
 function [q_traj_tt, q_traj_pp, q_traj_vv, q_traj_aa] = grafici_spazio_dei_giunti_e_coppie(puma560_model,q_start, q_stop, NPunti)
+    
+    joint_acc_max = [1.47,0.37,-0.449,1.74e-12,0.073,-1.475];
 
     for i=1:6
-        %function [p,F]=legge_moto_trapezoidale(T,Qf, Qi, NPunti)   
-        [p,F] = legge_moto_trapezoidale([0.5, 2.0, 0.5],q_stop(i), q_start(i), NPunti);
-        %[p,F] = trapezoidale_mod([0.05,0.4,0.05,2,0.05,0.4,0.05], [q_start(i), 0.0, 0.0, 0.74]);
+        [p,F] = trapezoidale_mod([0.05, 0.4, 0.05, 2, 0.05, 0.4, 0.05],300,[q_start(i), 0.0, 0.0, joint_acc_max(i)])
+        %[p,F] = legge_moto_trapezoidale([0.5, 2.0, 0.5],q_stop(i), q_start(i), 10);
         q_traj_pp(i,:)=F(1,:);
         q_traj_vv(i,:)=F(2,:);
         q_traj_aa(i,:)=F(3,:);
         q_traj_jj(i,:)=F(4,:);
     end
     
-    figure;
+    figure('Name','Grafici Spazio dei giunti'),
     q_traj_tt =p;
     subplot(4,1,1)
     plot(q_traj_tt,q_traj_pp)
@@ -47,7 +48,7 @@ function [q_traj_tt, q_traj_pp, q_traj_vv, q_traj_aa] = grafici_spazio_dei_giunt
     size(tau)
 
     %Plot
-    figure;
+    figure('Name', 'grafico delle coppie');
     subplot(1,1,1)
     plot(q_traj_tt,tau);
     xlabel("Tempo[s]");

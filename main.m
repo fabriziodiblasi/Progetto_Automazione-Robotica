@@ -82,3 +82,4 @@ segmento_nello_spazio_operativo(p_i, p_f, puma560_model)
 
 
 
+
