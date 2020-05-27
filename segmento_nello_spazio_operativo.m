@@ -11,10 +11,14 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     NPunti = 5;
   
     %legge_trapezoidale_scaricata(10,3,7)
+    s_posizione_start=0;
+    s_posizione_end = norm(x_e_f(1:3)-x_e_i(1:3));
 
-    [p,F] = legge_moto_trapezoidale([t_salita, t_rettilineo_unif, t_discesa],x_e_i(1:3), x_e_f(1:3), NPunti);
+    [p,F] = legge_moto_trapezoidale([t_salita, t_rettilineo_unif, t_discesa],s_posizione_end, s_posizione_start, NPunti);
+    
 %    
     figure;
+    title("Grafici della legge di moto")
     subplot(4,1,1)
     plot(p,F(1,:))
     xlabel("tempo [s]")
@@ -30,6 +34,23 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     xlabel("tempo [s]")
     ylabel("accelerazione [m/s2]")
     
+    [p_mod,F_mod] = trapezoidale_mod([0.05, 0.4, 0.05, 2, 0.05, 0.4, 0.05],NPunti,[0.0, 0.0, 0.0, 0.6560]);
+    figure;
+    title("Grafici della legge di moto canonica svolta a lezione")
+    subplot(4,1,1)
+    plot(p_mod,F_mod(1,:))
+    xlabel("tempo [s]")
+    ylabel("posizione [m]")
+    
+    subplot(4,1,2)
+    plot(p_mod,F_mod(2,:))
+    xlabel("tempo [s]")
+    ylabel("velocità [m/s]")
+    
+    subplot(4,1,3)
+    plot(p_mod,F_mod(3,:))
+    xlabel("tempo [s]")
+    ylabel("accelerazione [m/s2]")
     
 %     subplot(4,1,4)
 %     plot(p,F(4,:))
@@ -69,7 +90,7 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
 
     end
     
-    q_targhet = ikine(puma560_model, T, [zeros(1,6)]);
+    q_targhet = ikine(puma560_model, T, [zeros(1,6)])
 
     [num_samples,num_col] = size(q_targhet)
 
@@ -81,28 +102,33 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     plot_interpolated_trajectory(q_traj_t, q_traj_p, t, q_targhet, "posizione");
     run_simulation(0.1, q_traj_t, q_traj_p)
     
-    %velocità
-    vel = zeros(num_samples,num_col);
-    for col=1:num_col
-        for row=1:num_samples-1
-            vel(row,col) = (q_targhet(row+1,col)- q_targhet(row,col))/T(row);
-        end
-    end
-    [time, q_v, t]= join_spline_interpolation(vel, T);
-    plot_interpolated_trajectory(time, q_v, t, q_targhet, "velocita'");
+    %GRAFICI PUNTO 3 ED ESECUZIONE DEL PUNTO 4
+    [q_traj_tt, q_traj_pp, q_traj_vv, q_traj_aa] = grafici_spazio_dei_giunti_e_coppie(puma560_model,q_targhet(1,:), q_targhet(num_samples, :), NPunti);
     
     
-    %accelerazione
-    acc = zeros(num_samples,num_col);
-    for col=1:num_col
-        for row=1:num_samples-1
-            acc(row,col) = (vel(row+1,col)- vel(row,col))/T(row);
-        end
-    end
-    [time, q_a, t]= join_spline_interpolation(acc, T);
-    plot_interpolated_trajectory(time, q_a, t, q_targhet, "accelerazione");
     
-
+    new_q_start = [0.10, -0.45, -0.15, 0, 0, 0]
+    new_q_stop = x_e_f
+    
+    esegui_punto_5_6(new_q_start, new_q_stop, puma560_model, NPunti)
+    
+%     for i=1:length(q_traj_pp)
+%         tau(:,i) = puma560_model.rne(q_traj_pp(:,i)', q_traj_vv(:,i)', q_traj_aa(:,i)');
+%     end
+%      
+%     
+% 
+%     %Plot
+%     figure;
+%     subplot(1,1,1)
+%     plot(q_traj_tt,tau);
+%     xlabel("Tempo[s]");
+%     ylabel("Coppia [N*m]");
+% 
+%     l = legend({'J1','J2','J3','J4','J5','J6'});
+%     newPosition = [0.95 0.4 0.025 0.2];
+%     set(l, 'position', newPosition);
+%     
     
     
 end

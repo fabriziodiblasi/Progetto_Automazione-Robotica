@@ -1,4 +1,4 @@
-   function [p,F] = moto_unif_acc(T,Q0, NPunti)     
+   function [p,F] = moto_unif_acc_mod(T,Q0, NPunti)     
         f_0 = Q0(1); %posizione iniziale
         df_0 = Q0(2); %velocità iniziale
         ddf_0 = Q0(3); %accelerazione

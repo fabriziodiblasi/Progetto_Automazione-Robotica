@@ -13,8 +13,18 @@ a = [0.0, 0.4323, 0.0,  0.0,  0.0,  0.0];
 theta = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 d = [0.0,  0.0,  0.1501,  0.4331,  0.0,  0.0];
 
+m =[0, 17.4, 4.8, 0.82, 0.34,0.09];
 
-puma560_model = load_puma560_model(d, a, alpha);
+r_x =[0, -0.3638, -0.0203, 0, 0, 0];
+r_y=[0, 0.0060 ,-0.0141, 0.0190, 0, 0];
+r_z=[0, 0.2275, 0.0700, 0, 0, 0.0320];
+
+I_xx=[0, 0.1300, 0.0660, 0.0018, 0.0003, 0.00015];
+I_yy=[0.3500, 0.5240, 0.0860, 0.0013, 0.0004, 0.00015];
+I_zz=[0, 0.5390, 0.0125, 0.0018, 0.0003, 0.00004];
+
+
+puma560_model = load_puma560_model();
 
 % X = 4
 % %q(1) = [0 0 0 0 0 0]
@@ -56,9 +66,9 @@ end
 %PIANIFICAZIONE DELLA TRAIETTORIA CON PROFILO DI VELOCITA' TRAPEZOIDALE
 % ORIENTAMENTI DEFINITI SECONDO LA CONVENZIONE RPY
 
-p_i = [0.06, -0.45, -0.05, 0, 0, 0]; %punto inziale
+p_i = [0.05, -0.45, -0.05, 0, 0, 0]; %punto inziale
 
-p_f = [0.60, 0.15, 0.06, 0, 0, 0]; % punto finale
+p_f = [0.60, 0.15, 0.05, 0, 0, 0]; % punto finale
 
 %parametri della legge di moto trapezoidale
 
