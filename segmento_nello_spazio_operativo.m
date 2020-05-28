@@ -17,7 +17,8 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     [p,F] = legge_moto_trapezoidale([t_salita, t_rettilineo_unif, t_discesa],s_posizione_end, s_posizione_start, NPunti);
     [p_mod,F_mod] = trapezoidale_mod([0.05, 0.4, 0.05, 2, 0.05, 0.4, 0.05],300,[0.0, 0.0, 0.0, 0.6560]);
 
-    figure('Name','Leggi di moto (sx: custom, dx = canonica'); 
+    figure('Name','Leggi di moto sx: legge custom, dx = legge canonica'); 
+    %figure;
     subplot(4,2,1)
     plot(p,F(1,:))
     xlabel("tempo [s]")
@@ -70,7 +71,6 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
         Frames{i} = transl(x_e(i,1:3));
     end
     
-    figure;
     plot_frames(Frames);
     hold on;
     scatter3(x_e(2:end,1),x_e(2:end,2),x_e(2:end,3), 'ob');
@@ -103,6 +103,7 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     run_simulation(0.1, q_traj_t, q_traj_p)
     
     %GRAFICI PUNTO 3 ED ESECUZIONE DEL PUNTO 4
+    NPunti=300
     [q_traj_tt, q_traj_pp, q_traj_vv, q_traj_aa] = grafici_spazio_dei_giunti_e_coppie(puma560_model,q_targhet(1,:), q_targhet(num_samples, :), NPunti);
     
     

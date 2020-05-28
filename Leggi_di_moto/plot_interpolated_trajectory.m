@@ -1,5 +1,5 @@
 function plot_interpolated_trajectory(q_traj_t, q_traj_p, t, q_targhet, y_label)
-    figure;
+    figure('Name','Traiettoria nello spazio dei giunti');
     plot(q_traj_t, q_traj_p);
     xlabel("tempo")
     ylabel(y_label)

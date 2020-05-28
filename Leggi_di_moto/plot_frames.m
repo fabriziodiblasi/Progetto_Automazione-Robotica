@@ -16,7 +16,7 @@ function plot_frames(frames)
     ymax = max(y_v) + 1.0;  ymin = min(y_v) - 1.0;
     zmax = max(z_v) + 1.0;  zmin = min(z_v) - 1.0;
     
-    figure, daspect([1 1 1]), axis([xmin, xmax, ymin, ymax, zmin , zmax])
+    figure('Name','Traiettoria nello spazio operativo'), daspect([1 1 1]), axis([xmin, xmax, ymin, ymax, zmin , zmax])
     hold on, grid on
     xlabel('X[m]');
     ylabel('Y[m]');

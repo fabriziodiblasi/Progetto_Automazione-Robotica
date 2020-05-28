@@ -1,6 +1,7 @@
 %manipolatore seriale con 6 giunti rotoidali
 clear();
 clc();
+close all;
 
 %parametri DH del puma 560
 %? pi/2 0 ? ? ? 2 ? ? 2 ? ? ? 2  0   alpha
@@ -77,6 +78,10 @@ tempo_acc_dec = 0.5; %durata della rampa di salita e di discesa
 
 %MOTO PUNTO PUNTO
 segmento_nello_spazio_operativo(p_i, p_f, puma560_model)
+
+fprintf('esecuzione terminata. \npremi un tasto per terminare\n') ;
+pause();
+close all
 
 
 
