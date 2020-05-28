@@ -101,6 +101,7 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     %posizione
     plot_interpolated_trajectory(q_traj_t, q_traj_p, t, q_targhet, "posizione");
     run_simulation(0.1, q_traj_t, q_traj_p)
+
     
     %GRAFICI PUNTO 3 ED ESECUZIONE DEL PUNTO 4
     NPunti=300

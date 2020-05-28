@@ -11,7 +11,7 @@ function punto6(x_e_start, x_e_stop, puma560_model, NPunti)
     [trajectory_p,trajectory_v, trajectory_a] = compute_trajectory(q_start, q_stop, step_time, NPunti);
 
 
-    K_p = [0.03, 0.002, 0.00165, 0.00567, 0.0034, 0.00234];
+    K_p = [3, 2, 0.165, 0.567, 0.34, 0.234];
     K_d = [0.00020, 0.00010, 0.00010, 0.0003, 0.00008, 0.0003];
 
     simulator = puma560VrepSimulator()

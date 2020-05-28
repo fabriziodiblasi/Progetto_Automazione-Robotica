@@ -1,10 +1,10 @@
 function [q_traj_tt, q_traj_pp, q_traj_vv, q_traj_aa] = grafici_spazio_dei_giunti_e_coppie(puma560_model,q_start, q_stop, NPunti)
     
-    joint_acc_max = [1.47,0.37,-0.449,1.74e-12,0.073,-1.475];
+    %joint_acc_max = [1.47,0.37,-0.449,1.74e-12,0.073,-1.475];
 
     for i=1:6
-        [p,F] = trapezoidale_mod([0.05, 0.4, 0.05, 2, 0.05, 0.4, 0.05],NPunti,[q_start(i), 0.0, 0.0, joint_acc_max(i)])
-        %[p,F] = legge_moto_trapezoidale([0.5, 2.0, 0.5],q_stop(i), q_start(i), 10);
+        %[p,F] = trapezoidale_mod([0.05, 0.4, 0.05, 2, 0.05, 0.4, 0.05],NPunti,[q_start(i), 0.0, 0.0, joint_acc_max(i)])
+        [p,F] = legge_moto_trapezoidale([0.5, 2.0, 0.5],q_stop(i), q_start(i), 10);
         q_traj_pp(i,:)=F(1,:);
         q_traj_vv(i,:)=F(2,:);
         q_traj_aa(i,:)=F(3,:);
