@@ -1,15 +1,20 @@
 function esegui_punto_5_6(x_e_start, x_e_stop, puma560_model, NPunti)
 
     step_time=0.01;
+    new_pos_start = [0.10, -0.45, -0.15, 0, 0, 0];
+    
     %[trajectory_p,trajectory_v] = legge_moto_trapezoidale([0.5, 2.0, 0.5],q_stop, q_start, NPunti);
     T(:,:,1) = transl(x_e_start(1,1:3)); 
     T(:,:,2) = transl(x_e_stop(1,1:3));
+    T(:,:,3) = transl(new_pos_start(1,1:3));
 
     q_start = ikine(puma560_model,  T(:,:,1), [zeros(1,6)]); 
     q_stop = ikine(puma560_model,  T(:,:,2), [zeros(1,6)]); 
+    
+    new_joint_start_pos = ikine(puma560_model,  T(:,:,3), [zeros(1,6)]);
 
     [trajectory_p, trajectory_v, trajectory_a] = compute_trajectory(q_start, q_stop, step_time, NPunti);
-
+    
 
 
     K_p = [32, 65, 35, 33, 43, 54];
@@ -17,7 +22,7 @@ function esegui_punto_5_6(x_e_start, x_e_stop, puma560_model, NPunti)
 
     simulator = puma560VrepSimulator()
 
-    simulator.setq(q_start);
+    simulator.setq(new_joint_start_pos);
     pause(0.5);
     e_i = zeros(1,6)
     t=0;

@@ -109,7 +109,7 @@ function segmento_nello_spazio(x_e_i, x_e_f, puma560_model)
     
     
     
-    new_q_start = [0.10, -0.45, -0.15, 0, 0, 0]
+    new_q_start = x_e_i
     new_q_stop = x_e_f
     
     esegui_punto_5_6(new_q_start, new_q_stop, puma560_model, NPunti)
