@@ -1,5 +1,3 @@
-# Progetto_Automazione_Robotica
-
 ## Per scaricare il progetto in formato ZIP cliccare il seguente link: 
 https://github.com/fabriziodiblasi/Progetto_Automazione_Robotica/archive/master.zip
 
