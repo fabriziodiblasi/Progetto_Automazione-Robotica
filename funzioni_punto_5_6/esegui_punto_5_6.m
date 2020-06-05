@@ -40,7 +40,7 @@ function esegui_punto_5_6(x_e_start, x_e_stop, puma560_model, NPunti)
 
         e_p = q_d - q;
 
-        e_d= (dq_d - dq)/step_time;
+        e_d= (dq_d - dq);
 
         %e_i = e_i + e_p .*step_time;
 
