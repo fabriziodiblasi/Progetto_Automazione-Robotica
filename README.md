@@ -1,5 +1,7 @@
 ## Per scaricare il progetto in formato ZIP cliccare il seguente link: 
-https://github.com/fabriziodiblasi/Progetto_Automazione_Robotica/archive/master.zip
+https://github.com/fabriziodiblasi/Progetto_Automazione_Robotica/archive/master.zip \
+mirror: \
+https://mega.nz/file/PIJA3CiD#IsQzzsT_iY2oHPX5FlvqOZKjBefbXm-qN8cHD45Xezs
 
 ### Altrimenti : 
 Se nel sistema è installato GIT, digitare da linea di comando il seguente comando: 
